@@ -6,7 +6,9 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "test:unit": "vue-cli-service test:unit"
+    "test:unit": "vue-cli-service test:unit",
+    "format": "prettier --write **/*.{js,json,jsx,ts,tsx,md,vue}",
+    "format:check": "prettier --list-different **/*.{js,json,jsx,ts,tsx,md,vue}"
   },
   "dependencies": {
     "vue": "^2.6.6",
@@ -22,8 +24,10 @@
     "@vue/test-utils": "^1.0.0-beta.20",
     "babel-core": "7.0.0-bridge.0",
     "node-sass": "^4.9.0",
+    "prettier": "^1.16.4",
     "sass-loader": "^7.1.0",
     "ts-jest": "^23.0.0",
+    "tslint-config-prettier": "^1.18.0",
     "typescript": "^3.0.0",
     "vue-template-compiler": "^2.5.21"
   }
