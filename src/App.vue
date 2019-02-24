@@ -1,22 +1,30 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <h1>BOOK FINDER</h1>
+    <Search />
   </div>
 </template>
 
-<script>
-import HelloWorld from './components/HelloWorld.vue'
+<script lang="ts">
+import { Component, Vue, Provide } from 'vue-property-decorator'
+import Search from './components/Search.vue'
+import { MockSearchService, SearchService } from './service/search_service'
 
-export default {
-  name: 'app',
+@Component({
   components: {
-    HelloWorld
-  }
+    Search,
+  },
+})
+export default class App extends Vue {
+  @Provide() searchService: SearchService = new MockSearchService()
 }
 </script>
 
-<style>
+<style lang="scss">
+h1 {
+  text-decoration: uppercase;
+}
+
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
