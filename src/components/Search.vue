@@ -4,7 +4,7 @@
       <input v-model="keyword" placeholder="Type something here to search!" />
       <button @click="search(keyword)">Search</button>
     </div>
-    <ul class="search-result">
+    <ul v-if="!searching" class="search-result">
       <Book
         v-for="book in books"
         :key="book.id"
@@ -15,6 +15,8 @@
         :infoLink="book.infoLink"
       />
     </ul>
+    <span v-if="searching">Searching...</span>
+    <span v-if="!searching && books.length === 0">😣Nothing here yet! Try another query!</span>
   </div>
 </template>
 
@@ -32,10 +34,13 @@ import Book from './Book.vue'
 export default class Search extends Vue {
   books: BookItem[] = []
   keyword: string = ''
+  searching: boolean = false;
   @Inject() searchService!: SearchService
   public async search(keyword: string) {
+    this.searching = true
     const books = await this.searchService.search(keyword)
     this.books = books
+    this.searching = false
     console.log(books)
   }
 }
