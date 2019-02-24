@@ -5,11 +5,10 @@
         <img class="thumbnail" :src="thumbnail" alt="picture" />
       </div>
       <div class="right">
-        <a :href="infoLink" class="title"
-          ><h2>{{ title }}</h2></a
-        >
+        <h2>{{ title }}</h2>
         <span class="publisher">Published by {{ publisher }}</span>
         <span class="authors">Authors: {{ formattedAuthors(authors) }}</span>
+        <a :href="infoLink" class="see-more">See this book</a>
       </div>
     </div>
   </li>
@@ -33,7 +32,7 @@ export default class Book extends Vue {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 ul {
   list-style-type: none;
 }
@@ -53,7 +52,6 @@ ul {
 }
 
 .title {
-  text-decoration: none;
   color: grey;
 }
 
@@ -63,5 +61,33 @@ ul {
 
 .authors {
   display: block;
+}
+
+.right {
+  display: flex;
+  flex-direction: column;
+}
+
+.inner-book {
+  display: flex;
+}
+
+.see-more {
+  display: block;
+  height: 2rem;
+  line-height: 2rem;
+  width: 200px;
+  background-color: green;
+  border-radius: 10px;
+  color: white;
+  text-decoration: none;
+  transition: 1s;
+  border: 2px solid green;
+  &:hover {
+    color: green;
+    background-color: white;
+    border: 2px solid black;
+  }
+  margin: 0 auto;
 }
 </style>
