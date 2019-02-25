@@ -8,7 +8,11 @@
 <script lang="ts">
 import { Component, Vue, Provide } from 'vue-property-decorator'
 import Search from './components/Search.vue'
-import { MockSearchService, SearchService } from './service/search_service'
+import {
+  HttpSearchService,
+  MockSearchService,
+  SearchService,
+} from './service/search_service'
 
 @Component({
   components: {
@@ -16,7 +20,10 @@ import { MockSearchService, SearchService } from './service/search_service'
   },
 })
 export default class App extends Vue {
-  @Provide() searchService: SearchService = new MockSearchService()
+  // @Provide() searchService: SearchService = new MockSearchService()
+  @Provide() searchService: SearchService = new HttpSearchService(
+    process.env.BOOK_API_KEY
+  )
 }
 </script>
 
