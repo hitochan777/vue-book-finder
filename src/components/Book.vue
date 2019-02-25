@@ -19,12 +19,12 @@ import { Component, Prop, Vue } from 'vue-property-decorator'
 
 @Component
 export default class Book extends Vue {
-  @Prop({ default: [] }) authors!: string[]
-  @Prop() title!: string
-  @Prop({ default: undefined }) publisher!: string | undefined
+  @Prop({ default: [] }) private authors!: string[]
+  @Prop() private title!: string
+  @Prop({ default: undefined }) private publisher!: string | undefined
   @Prop({ default: 'http://placehold.jp/128x195.png?text=Not Found' })
-  thumbnail!: string
-  @Prop({ default: undefined }) infoLink!: string | undefined
+  private thumbnail!: string
+  @Prop({ default: undefined }) private infoLink!: string | undefined
 
   public formattedAuthors(authors: string[]): string {
     return authors.join(', ')

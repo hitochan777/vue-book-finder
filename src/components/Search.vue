@@ -34,16 +34,15 @@ import Book from './Book.vue'
   },
 })
 export default class Search extends Vue {
-  books: BookItem[] = []
-  keyword: string = ''
-  searching: boolean = false
-  @Inject() searchService!: SearchService
+  private books: BookItem[] = []
+  private keyword: string = ''
+  private searching: boolean = false
+  @Inject() private searchService!: SearchService
   public async search(keyword: string) {
     this.searching = true
     const books = await this.searchService.search(keyword)
     this.books = books
     this.searching = false
-    console.log(books)
   }
 }
 </script>
