@@ -16,7 +16,9 @@
       />
     </ul>
     <span v-if="searching">Searching...</span>
-    <span v-if="!searching && books.length === 0">😣Nothing here yet! Try another query!</span>
+    <span v-if="!searching && books.length === 0"
+      >😣Nothing here yet! Try another query!</span
+    >
   </div>
 </template>
 
@@ -34,7 +36,7 @@ import Book from './Book.vue'
 export default class Search extends Vue {
   books: BookItem[] = []
   keyword: string = ''
-  searching: boolean = false;
+  searching: boolean = false
   @Inject() searchService!: SearchService
   public async search(keyword: string) {
     this.searching = true
