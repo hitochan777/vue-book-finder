@@ -21,12 +21,15 @@ export class HttpSearchService implements SearchService {
   private client: AxiosInstance
   constructor(
     private apiKey: string,
-    endpoint: string = 'https://www.googleapis.com/books/v1/volumes'
+    endpoint: string = 'https://www.googleapis.com/books/v1/volumes',
+    client?: AxiosInstance
   ) {
-    this.client = axios.create({
-      baseURL: endpoint,
-      timeout: 2000,
-    })
+    this.client = client
+      ? client
+      : axios.create({
+          baseURL: endpoint,
+          timeout: 2000,
+        })
   }
 
   public async search(query: string): Promise<Book[]> {

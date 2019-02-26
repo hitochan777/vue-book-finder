@@ -10,7 +10,10 @@ module.exports = {
     '^@/(.*)$': '<rootDir>/src/$1',
   },
   snapshotSerializers: ['jest-serializer-vue'],
-  collectCoverageFrom: ['**/src/**/*.{js,jsx,ts,tsx,vue}'],
+  collectCoverageFrom: [
+    '**/src/**/*.{js,jsx,ts,tsx,vue}',
+    '!**/*mock*.{js,jsx,ts,tsx,vue}',
+  ],
   testMatch: ['**/src/**/*.spec.(js|jsx|ts|tsx)'],
   testURL: 'http://localhost/',
   globals: {
