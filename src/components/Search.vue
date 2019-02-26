@@ -16,8 +16,10 @@
       />
     </ul>
     <span v-if="searching">Searching...</span>
-    <span v-if="hasError">There was some error during the query</span>
-    <span v-if="!hasError && !searching && books.length === 0"
+    <span class="error" v-if="errorMessage.length > 0 && !searching">{{
+      errorMessage
+    }}</span>
+    <span v-if="errorMessage.length === 0 && !searching && books.length === 0"
       >😣Nothing here yet! Try another query!</span
     >
   </div>
@@ -38,16 +40,20 @@ export default class Search extends Vue {
   private books: BookItem[] = []
   private keyword: string = ''
   private searching: boolean = false
-  private hasError: boolean = false
+  private errorMessage: string = ''
   @Inject() private searchService!: SearchService
   public async search(keyword: string) {
+    if (keyword.length === 0) {
+      this.errorMessage = 'You need to type something to query!'
+      return
+    }
     this.searching = true
     try {
       const books = await this.searchService.search(keyword)
       this.books = books
-      this.hasError = false
+      this.errorMessage = ''
     } catch (error) {
-      this.hasError = true
+      this.errorMessage = 'There was some error during the query'
     }
     this.searching = false
   }
@@ -65,5 +71,9 @@ ul {
   justify-content: space-evenly;
   flex-wrap: wrap;
   flex-basis: auto;
+}
+
+.error {
+  color: red;
 }
 </style>

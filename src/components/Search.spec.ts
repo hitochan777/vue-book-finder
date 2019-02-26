@@ -24,6 +24,17 @@ describe('search with internet connection', () => {
     await (wrapper.vm as any).search('query')
     expect((wrapper.vm as any).books.length).toBe(10)
   })
+
+  it('does not send query request when the button is clicked, if the inputbox is empty', async () => {
+    const wrapper = shallowMount(Search, options)
+    const done = (wrapper.vm as any).search('')
+    expect(wrapper.html()).not.toContain('Searching...')
+    expect(wrapper.find('.error').exists()).toBe(true)
+    expect(wrapper.find('.error').text()).toContain(
+      'You need to type something to query!'
+    )
+    await done
+  })
 })
 
 describe('search without internet connection', () => {
@@ -37,6 +48,9 @@ describe('search without internet connection', () => {
       },
     })
     await (wrapper.vm as any).search('query')
-    expect(wrapper.html()).toContain('There was some error during the query')
+    expect(wrapper.find('.error').exists()).toBe(true)
+    expect(wrapper.find('.error').text()).toContain(
+      'There was some error during the query'
+    )
   })
 })
