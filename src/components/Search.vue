@@ -16,7 +16,8 @@
       />
     </ul>
     <span v-if="searching">Searching...</span>
-    <span v-if="!searching && books.length === 0"
+    <span v-if="hasError">There was some error during the query</span>
+    <span v-if="!hasError && !searching && books.length === 0"
       >😣Nothing here yet! Try another query!</span
     >
   </div>
@@ -37,11 +38,17 @@ export default class Search extends Vue {
   private books: BookItem[] = []
   private keyword: string = ''
   private searching: boolean = false
+  private hasError: boolean = false
   @Inject() private searchService!: SearchService
   public async search(keyword: string) {
     this.searching = true
-    const books = await this.searchService.search(keyword)
-    this.books = books
+    try {
+      const books = await this.searchService.search(keyword)
+      this.books = books
+      this.hasError = false
+    } catch (error) {
+      this.hasError = true
+    }
     this.searching = false
   }
 }
