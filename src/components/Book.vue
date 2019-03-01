@@ -40,14 +40,14 @@ ul {
 .book {
   position: relative;
   background-color: #f0f0f0;
-  border: 5px solid black;
-  width: 20%;
-  margin: 1rem 0;
+  width: 400px;
+  margin: 1rem;
   padding: 0;
 }
 @media only screen and (max-width: 768px) {
   .book {
     width: 100%;
+    margin: 5px;
   }
 }
 
@@ -66,6 +66,7 @@ ul {
 .right {
   display: flex;
   flex-direction: column;
+  overflow-wrap: anywhere;
 }
 
 .inner-book {
