@@ -1,8 +1,8 @@
 <template>
   <div class="search">
     <div class="search-box">
-      <input v-model="keyword" placeholder="Type something here to search!" />
-      <button @click="search(keyword)">Search</button>
+      <input type="search" class="search-box search-box--input" v-model="keyword" placeholder="Type something here to search!" />
+      <button class="search-box search-box--button" @click="search(keyword)">Search</button>
     </div>
     <ul v-if="!searching" class="search-result">
       <Book
@@ -60,7 +60,8 @@ export default class Search extends Vue {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+$search-box-height: 2rem;
 ul {
   list-style-type: none;
   padding: 0;
@@ -76,4 +77,29 @@ ul {
 .error {
   color: red;
 }
+
+.search-box {
+    height: $search-box-height;
+    font-size: 1rem;
+    font-family: san-serif;
+}
+
+.search-box--input {
+    width: 30%;
+    border-radius: 5px;
+    &:focus {
+        border-color: lightgreen;
+    }
+}
+
+.search-box--button {
+    background-color: lightgreen;
+    border: 0px;
+    color: white;
+    font-weight: bold;
+    margin-left: 5px;
+    border-radius: 5px;
+    vertical-align: top;
+}
 </style>
+
