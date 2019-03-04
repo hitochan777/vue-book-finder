@@ -63,14 +63,22 @@ ul {
   display: block;
 }
 
+.left {
+  width: 40%;
+}
+
 .right {
   display: flex;
   flex-direction: column;
+  min-height: 100%;
+  justify-content: space-evenly;
+  width: 60%;
   overflow-wrap: anywhere;
 }
 
 .inner-book {
   display: flex;
+  min-height: 100%;
 }
 
 .see-more {

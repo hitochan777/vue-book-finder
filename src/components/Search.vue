@@ -1,8 +1,15 @@
 <template>
   <div class="search">
     <div class="search-box">
-      <input type="search" class="search-box search-box--input" v-model="keyword" placeholder="Type something here to search!" />
-      <button class="search-box search-box--button" @click="search(keyword)">Search</button>
+      <input
+        type="search"
+        class="search-box search-box--input"
+        v-model="keyword"
+        placeholder="Type something here to search!"
+      />
+      <button class="search-box search-box--button" @click="search(keyword)">
+        Search
+      </button>
     </div>
     <ul v-if="!searching" class="search-result">
       <Book
@@ -15,7 +22,10 @@
         :infoLink="book.infoLink"
       />
     </ul>
-    <span v-if="searching">Searching...</span>
+    <div class="loading" v-if="searching">
+      <Loading />
+      <span>Searching...</span>
+    </div>
     <span class="error" v-if="errorMessage.length > 0 && !searching">{{
       errorMessage
     }}</span>
@@ -30,10 +40,12 @@ import { Component, Inject, Vue } from 'vue-property-decorator'
 import { SearchService } from '../service/search_service'
 import { Book as BookItem } from '../book'
 import Book from './Book.vue'
+import Loading from './Loading.vue'
 
 @Component({
   components: {
     Book,
+    Loading,
   },
 })
 export default class Search extends Vue {
@@ -79,27 +91,32 @@ ul {
 }
 
 .search-box {
-    height: $search-box-height;
-    font-size: 1rem;
-    font-family: san-serif;
+  height: $search-box-height;
+  font-size: 1rem;
+  font-family: san-serif;
 }
 
 .search-box--input {
-    width: 30%;
-    border-radius: 5px;
-    &:focus {
-        border-color: lightgreen;
-    }
+  width: 30%;
+  border-radius: 5px;
+  &:focus {
+    border-color: lightgreen;
+  }
 }
 
 .search-box--button {
-    background-color: lightgreen;
-    border: 0px;
-    color: white;
-    font-weight: bold;
-    margin-left: 5px;
-    border-radius: 5px;
-    vertical-align: top;
+  background-color: lightgreen;
+  border: 0px;
+  color: white;
+  font-weight: bold;
+  margin-left: 5px;
+  border-radius: 5px;
+  vertical-align: top;
+}
+
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 </style>
-
