@@ -12,7 +12,7 @@
     "format:check": "prettier --list-different **/*.{js,json,jsx,ts,tsx,md,vue}"
   },
   "dependencies": {
-    "axios": "0.18.0",
+    "axios": "0.18.1",
     "deepmerge": "3.2.0",
     "vue": "2.6.8",
     "vue-class-component": "7.0.1",
